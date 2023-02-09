@@ -4,11 +4,11 @@ from utils import get_db_handle
 import pymongo
 
 def index(request):
-    (db_handle, client) = get_db_handle("WebChat","localhost",27017,"","")
+    (db_handle, client) = get_db_handle("project","localhost",27017,"","")
     print(db_handle,client)
-    dbname = client["WebChat"]
+    dbname = client["project"]
     collection = dbname["Messages"]
     print(collection.find_one())
-    return HttpResponse("Hello, world. You're at the polls index.")
+    return render(request, "chat_app/index.html")
 
 # Create your views here.

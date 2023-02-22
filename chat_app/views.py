@@ -4,11 +4,12 @@ from utils import get_db_handle
 import pymongo
 
 def index(request):
-    (db_handle, client) = get_db_handle("project","localhost",27017,"","")
-    print(db_handle,client)
-    dbname = client["project"]
-    collection = dbname["Messages"]
-    print(collection.find_one())
-    return render(request, "chat_app/index.html")
+    return render(request, 'chat_app/index.html')
+
+def connexion(request):
+    return render(request, 'chat_app/connexion.html')
+
+def inscription(request):
+        return render(request, 'chat_app/inscription.html')
 
 # Create your views here.

@@ -15,8 +15,22 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from chat_app import views
+
+"""
+Sign in Admin page : 
+username : admin
+password : password
+
+pip install channels_redis
+"""
 
 urlpatterns = [
+    path("",views.index,name="index"),
+    path("connexion/",views.connexion,name="connexion"),
+    path("inscription/",views.inscription,name="inscription"),
+
     path('admin/', admin.site.urls),
     path("chat_app/", include("chat_app.urls")),
+    path("rooms/", include("room.urls")),
 ]

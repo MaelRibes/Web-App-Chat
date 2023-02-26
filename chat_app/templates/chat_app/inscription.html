@@ -1,100 +1,111 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-	<meta charset="utf-8">
-	<title>Inscription - WebChat</title>
-	<style>
-		body {
-			background-color: #f5deb3;
-			font-family: Arial, sans-serif;
-		}
-		.container {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			margin-top: 50px;
-		}
-		h1 {
-			font-size: 36px;
-			color: white;
-			margin-bottom: 30px;
-		}
-		form {
-			background-color: white;
-			padding: 20px;
-			border-radius: 10px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			width: 300px;
-		}
-		input[type="text"], input[type="password"] {
-			border: none;
-			background-color: #f7f7f7;
-			padding: 10px;
-			margin-bottom: 20px;
-			border-radius: 5px;
-			width: 100%;
-		}
-		input[type="submit"] {
-			background-color: #ffa500;
-			color: white;
-			border: none;
-			padding: 10px 20px;
-			border-radius: 5px;
-			cursor: pointer;
-			transition: background-color 0.2s ease;
-			width: 100%;
-		}
-		input[type="submit"]:hover {
-			background-color: #f57c00;
-		}
-		.error-message {
-			color: red;
-			font-size: 14px;
-			margin-top: 10px;
-		}
-        .centered{display: flex;
-			align-items: center;
-			justify-content: space-between;}
-	</style>
+    <meta charset="utf-8">
+    <title>Inscription - WebChat</title>
+    <style>
+        body {
+            background-color: #f5deb3;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 300px;
+        }
+
+        input[type="text"], input[type="password"] {
+            border: none;
+            background-color: #f7f7f7;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        input[type="submit"] {
+            background-color: #ffa500;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #f57c00;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .centered {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
 </head>
 <body>
-    <div class="centered"><button onclick="rtn()">Retourner</button> <a href="/connexion" class="button">Se connecter</a></div></br>
-	<div class="container">
-		<h1>Inscription</h1>
-		<form>
-			<label for="username">Nom d'utilisateur</label>
-			<input type="text" id="username" name="username" required>
-			<label for="password">Mot de passe</label>
-			<input type="password" id="password" name="password" required>
-			<label for="password-confirm">Confirmer le mot de passe</label>
-			<input type="password" id="password-confirm" name="password-confirm" required>
-			<input type="submit" value="S'inscrire">
-		</form>
-		<div class="error-message"></div>
-	</div>
-	<script>
-		const form = document.querySelector('form');
-		const errorMessage = document.querySelector('.error-message');
-		form.addEventListener('submit', (event) => {
-			event.preventDefault();
-			const username = form.username.value;
-			const password = form.password.value;
-			const passwordConfirm = form['password-confirm'].value;
-			if (password !== passwordConfirm) {
-				errorMessage.textContent = 'Les mots de passe ne correspondent pas';
-			} else {
-				// Envoyer les données du formulaire au serveur
-				console.log(`Nom d'utilisateur : ${username}\nMot de passe : ${password}`);
-			}
-		});
-	</script>
-</body>
-</html>
+
+<div class="centered">
+    <a href="{% url 'index' %}" class="btn btn-primary">Retourner à la page d'accueil</a>
+
+    <a href="/connexion" class="button">
+        Se connecter
+    </a>
+</div>
+
+<div class="container">
+    <h1>Inscription</h1>
+
+    {% if error_message %}
+        <div class="alert alert-danger error-message">{{ error_message }}</div>
+    {% endif %}
+
+    <form method="post" action="">
+        <label for="username">Nom d'utilisateur
+            <input type="text" id="username" name="username" required>
+        </label>
+        <label for="password1">Mot de passe
+            <input type="password" id="password1" name="password1" required>
+        </label>
+        <label for="password2">Confirmer le mot de passe
+            <input type="password" id="password2" name="password2" required>
+        </label>
+        {% csrf_token %}
+        <input type="submit" value="S'inscrire">
+    </form>
+</div>
+
 <script>
     function rtn() {
-       window.history.back();
+        window.history.back();
     }
-    </script>
+</script>
+</body>
+</html>

@@ -45,7 +45,7 @@ def inscription(request):
 @login_required
 def deconnexion(request):
     redis_conn = get_redis_connection('default')
-    redis_conn.delete(f"myproject:1:Connected {request.user}")
+    redis_conn.delete(f"userSession:1:Connected {request.user}")
     print(request.user)
     logout(request)
     return render(request, 'chat_app/index.html')

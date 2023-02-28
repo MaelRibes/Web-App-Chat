@@ -2,10 +2,6 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <div class="centered">
-        <button onclick="rtn()">Retourner</button>
-        <a href="/inscription" class="button">S'inscrire</a></div>
-    </br>
     <title>Connexion - WebChat</title>
     <style>
         body {
@@ -69,6 +65,9 @@
     </style>
 </head>
 <body>
+<div class="centered">
+    <a href="{% url 'index' %}" class="btn btn-primary">Retourner à la page d'accueil</a>
+</div>
 <div class="container">
     <h1>Connexion</h1>
     {% if error_message %}
@@ -88,6 +87,8 @@
         {% csrf_token %}
         <input type="submit" value="Se connecter">
     </form>
+    <br>
+    <div>Pas encore de compte ? <a href="/inscription" class="button">Inscrivez vous</a> !</div>
 </div>
 <script>
     function rtn() {

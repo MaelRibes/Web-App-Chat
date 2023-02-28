@@ -1,6 +1,7 @@
 from django.shortcuts import redirect
 from django.urls import reverse
 
+
 class RedirectAuthenticatedUserMiddleware:
 
     def __init__(self, get_response):

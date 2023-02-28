@@ -18,7 +18,7 @@
 
         h1 {
             font-size: 36px;
-            color: white;
+            color: #333;
             margin-bottom: 30px;
         }
 
@@ -74,10 +74,6 @@
 
 <div class="centered">
     <a href="{% url 'index' %}" class="btn btn-primary">Retourner à la page d'accueil</a>
-
-    <a href="/connexion" class="button">
-        Se connecter
-    </a>
 </div>
 
 <div class="container">
@@ -100,6 +96,8 @@
         {% csrf_token %}
         <input type="submit" value="S'inscrire">
     </form>
+    <br>
+    <div>Déjà inscrit ? <a href="/connexion" class="button">Connectez vous</a> !</div>
 </div>
 
 <script>

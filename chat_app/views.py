@@ -6,8 +6,10 @@ from .forms import SignUpForm
 from django.contrib.auth import logout
 from django_redis import get_redis_connection
 
+
 def index(request):
     return render(request, 'chat_app/index.html')
+
 
 def connexion(request):
     if request.method == 'POST':
@@ -17,7 +19,7 @@ def connexion(request):
 
         if user is not None:
             login(request, user)
-            print(user.username,user)
+            print(user.username, user)
             cache.set("Connected " + user.username, user)  # stocker l'utilisateur dans le cache Redis
             return render(request, 'chat_app/index.html')
         else:
@@ -41,6 +43,7 @@ def inscription(request):
     else:
         form = SignUpForm()
     return render(request, 'chat_app/inscription.html', {'form': form, 'error_message': error_message})
+
 
 @login_required
 def deconnexion(request):

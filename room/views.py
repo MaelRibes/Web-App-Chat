@@ -27,3 +27,4 @@ def room(request,urlRoom):
     messages = collectionMessages.find({"name":urlRoom})
     form = MessageForm()
     return render(request, 'room/room.html', {'room': room, "messages" : messages, 'form' : form})
+

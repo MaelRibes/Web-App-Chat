@@ -1,77 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<div class="centered">
-	<button onclick="rtn()">Retourner</button> <a href="/inscription" class="button">S'inscrire</a></div></br>
-	<title>Connexion - WebChat</title>
-	<style>
-		body {
-			background-color: #f5deb3;
-			font-family: Arial, sans-serif;
-		}
-		.container {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			margin-top: 50px;
-		}
-		.centered{display: flex;
-			align-items: center;
-			justify-content: space-between;}
-		h1 {
-			font-size: 36px;
-			color: 333;
-			margin-bottom: 30px;
-		}
-		form {
-			background-color: white;
-			padding: 20px;
-			border-radius: 10px;
-			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			width: 300px;
-		}
-		input[type="text"], input[type="password"] {
-			border: none;
-			background-color: #f7f7f7;
-			padding: 10px;
-			margin-bottom: 20px;
-			border-radius: 5px;
-			width: 100%;
-		}
-		input[type="submit"] {
-			background-color: #ffa500;
-			color: white;
-			border: none;
-			padding: 10px 20px;
-			border-radius: 5px;
-			cursor: pointer;
-			transition: background-color 0.2s ease;
-			width: 100%;
-		}
-		input[type="submit"]:hover {
-			background-color: #f57c00;
-		}
-	</style>
+    <meta charset="utf-8">
+    <title>Connexion - WebChat</title>
+    <style>
+        body {
+            background-color: #f5deb3;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .centered {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 30px;
+        }
+
+        form {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 300px;
+        }
+
+        input[type="text"], input[type="password"] {
+            border: none;
+            background-color: #f7f7f7;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            width: 100%;
+        }
+
+        input[type="submit"] {
+            background-color: #ffa500;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #f57c00;
+        }
+    </style>
 </head>
 <body>
-	<div class="container">
-		<h1>Connexion</h1>
-		<form>
-			<label for="username">Nom d'utilisateur</label>
-			<input type="text" id="username" name="username" required>
-			<label for="password">Mot de passe</label>
-			<input type="password" id="password" name="password" required>
-			<input type="submit" value="Se connecter">
-		</form>
-	</div>
-</body>
-</html>
+<div class="centered">
+    <a href="{% url 'index' %}" class="btn btn-primary">Retourner à la page d'accueil</a>
+</div>
+<div class="container">
+    <h1>Connexion</h1>
+    {% if error_message %}
+        <div class="alert alert-danger error-message">
+            {{ error_message }}
+        </div>
+    {% endif %}
+
+
+    <form method="post" action="">
+        <label for="username">Nom d'utilisateur
+            <input type="text" id="username" name="username" required>
+        </label>
+        <label for="password">Mot de passe
+            <input type="password" id="password" name="password" required>
+        </label>
+        {% csrf_token %}
+        <input type="submit" value="Se connecter">
+    </form>
+    <br>
+    <div>Pas encore de compte ? <a href="/inscription" class="button">Inscrivez vous</a> !</div>
+</div>
 <script>
     function rtn() {
-       window.history.back();
+        window.history.back();
     }
-    </script>
+</script>
+</body>
+</html>

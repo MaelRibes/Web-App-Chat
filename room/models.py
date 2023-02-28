@@ -2,8 +2,8 @@ from django.db import models
 
 class User(models.Model):
     pseudo = models.CharField(max_length=20)
-    password = models.CharField(max_length=255)
-    
+    password = models.CharField(max_length=255)   
+
 class Room(models.Model):
     name = models.CharField(max_length=255)
     urlRoom = models.SlugField(unique=True) 

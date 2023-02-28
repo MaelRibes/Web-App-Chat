@@ -114,24 +114,24 @@
 <main>
     <ul>
         {% for message in messages %}
-            <li>
-                <div>
-                    <h2>{{ message.username }}</h2>
-                    <p>{{ message.content }}</p>
-                    <p><small>{{ message.date }}</small></p>
-                </div>
-            </li>
-        {% endfor %}
-    </ul>
-    <form method="post" action=".">
-        <label for="user-message">Votre message :</label>
-        <textarea id="user-message" name="user-message" rows="3"></textarea>
-        <input type="submit" value="Envoyer">
-    </form>
-</main>
-</body>
-</html>
-<script>
+        <li>
+            <div>
+              <h2>{{message.username}}</h2>
+              <p>{{message.content}}</p>
+              <p><small>{{message.date}}</small></p>
+            </div>
+          </li>
+        {% endfor%}
+        </ul>
+        <form method="post" action=".">
+          {% csrf_token %}
+          {{form}}
+          <input type="submit" value="Envoyer">
+        </form>
+      </main>
+    </body>
+  </html>
+  <script>
     function rtn() {
         window.history.back();
     }

@@ -23,10 +23,10 @@ def room(request, urlRoom):
             collectionMessages = db["Messages"]
             form = form.cleaned_data
             form["username"] = request.user.username
-            form["date"] = datetime.now().strftime("%-d/%-m/%Y %H:%M:%S")
+            print(datetime.now().strftime("%#d/%#m/%Y %H:%M:%S"))
+            form["date"] = datetime.now().strftime("%#d/%#m/%Y %H:%M:%S")
             form["room"] = collectionRoom.find_one({"name": urlRoom})["_id"]
             collectionMessages.insert_one(form)
-
     room = collectionRoom.find_one({"name": urlRoom})
     collectionMessages = db["Messages"]
     messages = collectionMessages.find({"room": room["_id"]})

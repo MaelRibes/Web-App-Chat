@@ -18,12 +18,10 @@ def room(request, urlRoom):
     collectionRoom = db["Room"]
     if request.method == 'POST':
         form = MessageForm(request.POST)
-        print(form)
         if form.is_valid():
             collectionMessages = db["Messages"]
             form = form.cleaned_data
             form["username"] = request.user.username
-            print(datetime.now().strftime("%#d/%#m/%Y %H:%M:%S"))
             form["date"] = datetime.now().strftime("%#d/%#m/%Y %H:%M:%S")
             form["room"] = collectionRoom.find_one({"name": urlRoom})["_id"]
             collectionMessages.insert_one(form)

@@ -1,138 +1,201 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>WebChat</title>
     <style>
-        body {
-            background-color: #f5deb3;
-            color: #333;
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+      body {
+        background-color: #f5deb3;
+        color: #333;
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+      }
 
-        header {
-            background-color: #ffa500;
-            color: #fff;
-            padding: 1rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+      header {
+        background-color: #ffa500;
+        color: #fff;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
 
-        h1 {
-            margin: 0;
-        }
+      h1 {
+        margin: 0;
+      }
 
-        main {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 1rem;
-        }
+      main {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 1rem;
+      }
 
-        ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            background-color: #fff;
-            border-radius: 0.5rem;
-            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
-            width: 80%;
-            max-height: 50vh;
-            overflow-y: auto;
-        }
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        background-color: #fff;
+        border-radius: 0.5rem;
+        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+        width: 80%;
+        max-height: 50vh;
+        overflow-y: auto;
+      }
 
-        li {
-            display: flex;
-            align-items: center;
-            padding: 1rem;
-            border-bottom: 1px solid #ddd;
-        }
+      li {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        border-bottom: 1px solid #ddd;
+      }
 
-        li:last-child {
-            border-bottom: none;
-        }
+      li:last-child {
+        border-bottom: none;
+      }
 
+      h2 {
+        margin: 0;
+        font-size: 1rem;
+      }
 
-        h2 {
-            margin: 0;
-            font-size: 1rem;
-        }
+      p {
+        margin: 0;
+      }
 
-        p {
-            margin: 0;
-        }
+      small {
+        color: #777;
+      }
 
-        small {
-            color: #777;
-        }
+      form {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        margin-top: 1rem;
+      }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            width: 80%;
-            margin-top: 1rem;
-        }
+      label {
+        margin-bottom: 0.5rem;
+      }
 
-        label {
-            margin-bottom: 0.5rem;
-        }
+      input[type="text"],
+      textarea {
+        border-radius: 0.5rem;
+        border: none;
+        padding: 0.5rem;
+        font-family: sans-serif;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+      }
 
-        input[type="text"],
-        textarea {
-            border-radius: 0.5rem;
-            border: none;
-            padding: 0.5rem;
-            font-family: sans-serif;
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
+      input[type="submit"] {
+        background-color: #ffa500;
+        color: #fff;
+        border: none;
+        border-radius: 0.5rem;
+        padding: 0.5rem 1rem;
+        font-family: sans-serif;
+        font-size: 1rem;
+        cursor: pointer;
+      }
 
-        input[type="submit"] {
-            background-color: #ffa500;
-            color: #fff;
-            border: none;
-            border-radius: 0.5rem;
-            padding: 0.5rem 1rem;
-            font-family: sans-serif;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        input[type="submit"]:hover {
-            background-color: #ff8c00;
-        }
+      input[type="submit"]:hover {
+        background-color: #ff8c00;
+      }
     </style>
-</head>
-<body>
-<header>
-    <h1>Chat - {{ room.room_name }}</h1>
-    <button onclick="rtn()">Retourner</button>
-</header>
-<main>
-    <ul>
+  </head>
+  <body>
+    <header>
+      <h1>Chat - {{ room.name }}</h1>
+      <button onclick="rtn()">Retourner</button>
+    </header>
+    <main>
+      <ul id="message-list">
         {% for message in messages %}
         <li>
-            <div>
-              <h2>{{message.username}}</h2>
-              <p>{{message.content}}</p>
-              <p><small>{{message.date}}</small></p>
-            </div>
-          </li>
+          <div>
+            <h2>{{message.username}}</h2>
+            <p>{{message.content}}</p>
+            <p><small>{{message.date}}</small></p>
+          </div>
+        </li>
         {% endfor%}
-        </ul>
-        <form method="post" action=".">
-          {% csrf_token %}
-          {{form}}
-          <input type="submit" value="Envoyer">
-        </form>
-      </main>
-    </body>
-  </html>
-  <script>
-    function rtn() {
-        window.history.back();
+      </ul>
+      <form method="post" action=".">
+        {% csrf_token %} {{form}}
+        <input id="message-submit" type="submit" value="Envoyer" />
+      </form>
+    </main>
+  </body>
+</html>
+<script type="text/javascript">
+  function rtn() {
+    window.history.back();
+  }
+
+  function addMessageToList(message) {
+    let ul = document.querySelector("#message-list");
+    let li = document.createElement("li");
+    let div = document.createElement("div");
+    let h2 = document.createElement("h2");
+    let p1 = document.createElement("p");
+    let p2 = document.createElement("p");
+    let small = document.createElement("small");
+
+    small.appendChild(document.createTextNode(message.date));
+    p2.appendChild(small);
+    p1.appendChild(document.createTextNode(message.content));
+    h2.appendChild(document.createTextNode(message.username));
+    div.appendChild(h2);
+    div.appendChild(p1);
+    div.appendChild(p2);
+    li.appendChild(div);
+    ul.appendChild(li);
+  }
+
+  const roomName = "{{room.name}}";
+
+  const chatSocket = new WebSocket(
+    "ws://" + window.location.host + "/ws/chat/" + roomName + "/"
+  );
+
+  chatSocket.onmessage = function (e) {
+    const message = JSON.parse(e.data);
+    addMessageToList(message);
+  };
+
+  chatSocket.onclose = function (e) {
+    console.error("Chat socket closed unexpectedly");
+  };
+
+  document.querySelector("#message-input").focus();
+  document.querySelector("#message-input").onkeyup = function (e) {
+    if (e.keyCode === 13) {
+      document.querySelector("#message-submit").click();
     }
+  };
+
+  document.querySelector("#message-submit").onclick = function (e) {
+    const messageInputDom = document.querySelector("#message-input");
+    const message = messageInputDom.value;
+    let today = new Date();
+    let date =
+      today.getDate() +
+      "/" +
+      (today.getMonth() + 1) +
+      "/" +
+      today.getFullYear();
+    let time =
+      today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    let dateTime = date + " " + time;
+    chatSocket.send(
+      JSON.stringify({
+        username: "{{username}}",
+        content: message,
+        date: dateTime,
+      })
+    );
+    messageInputDom.value = "";
+  };
 </script>

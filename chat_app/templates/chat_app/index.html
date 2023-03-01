@@ -109,6 +109,24 @@
         <a href="/inscription" class="button">S'inscrire</a>
     {% endif %}
 
+
+    {% if connectedUsersArray and number_of_connexion  %}
+        <div>
+            <h4>Utilisateurs connectés {{ number_of_connexion }}</h4><br/>
+            {% for username in connectedUsersArray %}
+                <li>{{ username }}</li>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% if disconnectedUsersArray %}
+        <div>
+            <h4>Utilisateurs déconnectés</h4><br/>
+            {% for user in disconnectedUsersArray %}
+                <li>{{ user }}</li>
+            {% endfor %}
+        </div>
+    {% endif %}
+
 </div>
 
 

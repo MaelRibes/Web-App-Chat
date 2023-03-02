@@ -124,7 +124,7 @@
         <div>
             <h4>Utilisateurs déconnectés</h4><br/>
             {% for user in disconnectedUsersArray %}
-            <li><a href="{% url 'historique' user %}">{{ user }}</a></li>
+                <li><a href="{% url 'historique' user %}">{{ user }}</a></li>
             {% endfor %}
         </div>
     {% endif %}

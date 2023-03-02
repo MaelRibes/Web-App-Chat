@@ -97,54 +97,17 @@
 {% include 'chat_app/header.html' %}
 
 <h1>Bienvenue sur Notre Application de Messagerie</h1>
-<p>Communiquez avec vos amis et votre famille, où que vous soyez.</p>
-<div class="centered">
-    {% if user.is_authenticated %}
-        <nav>
-            <ul>
-                <li>Bienvenue {{ user.username }}!</li>
-                <a class="button" href="{% url 'deconnexion' %}">Deconnexion</a>
-            </ul>
-        </nav>
-    {% else %}
-        <a href="/connexion" class="button">Se connecter</a>
-        <a href="/inscription" class="button">S'inscrire</a>
-    {% endif %}
-
-
-    {% if connectedUsersArray and number_of_connexion  %}
-        <div>
-            <h4>Utilisateurs connectés {{ number_of_connexion }}</h4><br/>
-            {% for username in connectedUsersArray %}
-                <li><a href="{% url 'historique' username %}">{{ username }}</a></li>
+<div class="container">
+    <h3>Historique de : {{ user }}</h3><br>
+    {% if userHistoData %}
+        <h4>Dernière connexion enregistré</h4></br>
+            {% for users in userHistoData %}
+                <li>Date : {{users.0}} Time :{{users.1}}</li>
             {% endfor %}
-        </div>
+        {% else %}
+        <p class="error"> Aucune conenxion récente effectué</p>
     {% endif %}
-    {% if disconnectedUsersArray %}
-        <div>
-            <h4>Utilisateurs déconnectés</h4><br/>
-            {% for user in disconnectedUsersArray %}
-                <li><a href="{% url 'historique' user %}">{{ user }}</a></li>
-            {% endfor %}
-        </div>
-    {% endif %}
-
-</div>x
-
-<div class="features">
-    <div class="feature">
-        <h2>Communication en temps réel</h2>
-        <p>Discutez avec vos contacts en temps réel, grâce à notre plateforme de messagerie instantanée.</p>
-    </div>
-    <div class="feature">
-        <h2>Gestion des conversations</h2>
-        <p>Organise
-            et archivez vos conversations, pour retrouver facilement vos échanges passés.</p>
-    </div>
-    <div class="feature">
-        <h2>Partage de fichiers</h2>
-        <p>Partagez des documents, des photos et des vidéos avec vos contacts, directement depuis l'application.</p>
-    </div>
 </div>
+
 </body>
 </html>

@@ -171,7 +171,8 @@
             <h4>Utilisateurs : </h4><br/>
             {% for username in connectedUsersArray %}
                 <li>
-                    <a href="{% url 'historique' username %}" id="connecte">{{ username }}<span id="connecte-info">{{ username }} est connecté</span></a>
+                    <a href="{% url 'historique' username %}" id="connecte">{{ username }}<span
+                            id="connecte-info">{{ username }} est connecté</span></a>
                 </li>
             {% endfor %}
             {% for username in disconnectedUsersArray %}

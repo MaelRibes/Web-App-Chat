@@ -96,14 +96,18 @@
 <body>
 
 <h1>Bienvenue sur Notre Application de Messagerie</h1>
+<div>
+    <a class="button" href="{% url 'index' %}">Accueil</a>
+</div>
+<br>
 <div class="container">
     <h3>Historique de : {{ user }}</h3><br>
     {% if userHistoData %}
         <h4>Dernière connexion enregistré</h4></br>
-            {% for users in userHistoData %}
-                <li>Date : {{users.0}} Time :{{users.1}}</li>
-            {% endfor %}
-        {% else %}
+        {% for users in userHistoData %}
+            <li>Date : {{ users.0 }} Time :{{ users.1 }}</li>
+        {% endfor %}
+    {% else %}
         <p class="error"> Aucune conenxion récente effectué</p>
     {% endif %}
 </div>

@@ -1,11 +1,13 @@
 import datetime
+
+from django.contrib.auth import login, authenticate, get_user_model
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate, get_user_model
-from .forms import SignUpForm
-from django.contrib.auth import logout
 from django_redis import get_redis_connection
+
+from .forms import SignUpForm
 
 
 def index(request):
@@ -87,6 +89,6 @@ def historique(request, user):
         for usersData in arrayOfHistoUsername:
             date = usersData.split('_')[1].split(' ')[0]
             time = usersData.split('_')[1].split(' ')[1].replace(f":{user}", '')
-            userHistoData.append([date,time])
+            userHistoData.append([date, time])
         print(userHistoData)
-    return render(request, 'chat_app/historique.html', {'user': user ,'userHistoData':userHistoData})
+    return render(request, 'chat_app/historique.html', {'user': user, 'userHistoData': userHistoData})

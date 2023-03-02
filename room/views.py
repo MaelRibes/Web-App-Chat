@@ -1,8 +1,10 @@
+from datetime import datetime
+
 from django.shortcuts import render
-from .models import Room
+
 from utils import get_db_handle
 from .forms import MessageForm
-from datetime import datetime
+from .models import Room
 
 (db_handle, client) = get_db_handle()
 db = client["WebChat"]
@@ -29,4 +31,5 @@ def room(request, urlRoom):
     collectionMessages = db["Messages"]
     messages = collectionMessages.find({"room": room["_id"]})
     form = MessageForm()
-    return render(request, 'room/room.html', {'room': room, "messages": messages, 'form': form, "username": request.user.username})
+    return render(request, 'room/room.html',
+                  {'room': room, "messages": messages, 'form': form, "username": request.user.username})

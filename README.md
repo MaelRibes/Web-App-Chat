@@ -34,8 +34,9 @@ En ce qui concerne la gestion de projet, nous avons répartis les tâches pour q
 
 Django est un framework qui utilise le pattern MVC (Modèle-Vue-Contrôleur). L'application est donc décomposée avec les 3 éléments suivants : 
 - Modèle : les objets de la DB Mongo (messages et salons)
-- Contrôleur : le code Python qui permet la logique des interactions de l'utilisateur avec le site
 - Vue : les pages HTML présentant les données
+- Contrôleur : le code Python qui permet la logique des interactions de l'utilisateur avec le site
+
 
 Il faut rajouter à ce modèle, la BD Redis, qui sert de cache pour la session des utilisateurs et de canal, pour pouvoir transmettre les messages de façon instantannée.
 

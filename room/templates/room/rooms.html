@@ -27,6 +27,25 @@
             font-weight: normal;
         }
 
+        .button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: #ffa500;
+            color: #fff;
+            border: none;
+            border-radius: 1rem;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            margin: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: #fff;
+            cursor: pointer;
+        }
+
         /* Style pour la liste des salons */
         .salon-list {
             margin: 30px auto;
@@ -119,6 +138,9 @@
 <header>
     <h1>Application de messagerie</h1>
 </header>
+<div class="centered">
+    <a class="button" href="{% url 'index' %}">Accueil</a>
+</div>
 <ul class="salon-list">
     {% for room in rooms %}
         <li>

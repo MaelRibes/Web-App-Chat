@@ -9,6 +9,26 @@
             font-family: Arial, sans-serif;
         }
 
+        .button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: #ffa500;
+            color: #fff;
+            border: none;
+            border-radius: 1rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-align: center;
+            text-transform: uppercase;
+            margin: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: rgba(255, 255, 255, 0.8);
+            cursor: pointer;
+        }
+
         .container {
             display: flex;
             flex-direction: column;
@@ -66,7 +86,7 @@
 </head>
 <body>
 <div class="centered">
-    <a href="{% url 'index' %}" class="btn btn-primary">Retourner à la page d'accueil</a>
+    <a class="button" href="{% url 'index' %}">Accueil</a>
 </div>
 <div class="container">
     <h1>Connexion</h1>
@@ -88,7 +108,7 @@
         <input type="submit" value="Se connecter">
     </form>
     <br>
-    <div>Pas encore de compte ? <a href="/inscription" class="button">Inscrivez vous</a> !</div>
+    <div>Pas encore de compte ? <a href="/inscription">Inscrivez vous</a> !</div>
 </div>
 <script>
     function rtn() {

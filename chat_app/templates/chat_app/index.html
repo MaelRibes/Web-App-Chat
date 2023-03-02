@@ -76,6 +76,13 @@
             box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
         }
 
+        .users {
+            padding: 1rem;
+            background-color: rgba(255, 255, 255, 0.8);
+            border-radius: 1rem;
+            box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.2);
+        }
+
         .centered {
             display: flex;
             align-items: center;
@@ -91,19 +98,67 @@
             font-size: 1.1rem;
             line-height: 1.5;
         }
+
+        #connecte {
+            color: green;
+        }
+
+        #connecte-info {
+            position: absolute;
+            margin-top: 23px;
+            margin-left: -35px;
+            color: green;
+            font-weight: bold;
+            background: rgba(0, 0, 0, .7);
+            padding: 15px;
+            border-radius: 3px;
+            box-shadow: 0 0 2px rgba(0, 0, 0, .5);
+            transform: scale(0) rotate(-12deg);
+            transition: all .25s;
+            opacity: 0;
+        }
+
+        #connecte:hover #connecte-info, #connecte:focus #connecte-info {
+            transform: scale(1) rotate(0);
+            opacity: 1;
+        }
+
+        #deconnecte {
+            color: red;
+        }
+
+        #deconnecte-info {
+            position: absolute;
+            margin-top: 23px;
+            margin-left: -35px;
+            color: red;
+            font-weight: bold;
+            background: rgba(0, 0, 0, .7);
+            padding: 15px;
+            border-radius: 3px;
+            box-shadow: 0 0 2px rgba(0, 0, 0, .5);
+            transform: scale(0) rotate(-12deg);
+            transition: all .25s;
+            opacity: 0;
+        }
+
+        #deconnecte:hover #deconnecte-info, #deconnecte:focus #deconnecte-info {
+            transform: scale(1) rotate(0);
+            opacity: 1;
+        }
+
     </style>
 </head>
 <body>
-{% include 'chat_app/header.html' %}
-
 <h1>Bienvenue sur Notre Application de Messagerie</h1>
 <p>Communiquez avec vos amis et votre famille, où que vous soyez.</p>
 <div class="centered">
     {% if user.is_authenticated %}
         <nav>
             <ul>
-                <li>Bienvenue {{ user.username }}!</li>
-                <a class="button" href="{% url 'deconnexion' %}">Deconnexion</a>
+                <h2>Bienvenue {{ user.username }} !</h2>
+                <a class="button" href='{% url 'rooms' %}'>Accéder aux rooms</a>
+                <a class="button" href='{% url 'deconnexion' %}'>Deconnexion</a>
             </ul>
         </nav>
     {% else %}
@@ -111,25 +166,24 @@
         <a href="/inscription" class="button">S'inscrire</a>
     {% endif %}
 
-
-    {% if connectedUsersArray and number_of_connexion  %}
-        <div>
-            <h4>Utilisateurs connectés {{ number_of_connexion }}</h4><br/>
+    {% if connectedUsersArray or disconnectedUsersArray %}
+        <div class="users">
+            <h4>Utilisateurs : </h4><br/>
             {% for username in connectedUsersArray %}
-                <li><a href="{% url 'historique' username %}">{{ username }}</a></li>
+                <li>
+                    <span id="connecte">{{ username }}<span id="connecte-info">{{ username }} est connecté</span></span>
+                </li>
+            {% endfor %}
+            {% for username in disconnectedUsersArray %}
+                <li>
+                    <span id="deconnecte">{{ username }}<span
+                            id="deconnecte-info">{{ username }} est déconnecté</span></span>
+                </li>
             {% endfor %}
         </div>
     {% endif %}
-    {% if disconnectedUsersArray %}
-        <div>
-            <h4>Utilisateurs déconnectés</h4><br/>
-            {% for user in disconnectedUsersArray %}
-                <li><a href="{% url 'historique' user %}">{{ user }}</a></li>
-            {% endfor %}
-        </div>
-    {% endif %}
+</div>
 
-</div>x
 
 <div class="features">
     <div class="feature">
@@ -147,4 +201,4 @@
     </div>
 </div>
 </body>
-</html>
+</html>    

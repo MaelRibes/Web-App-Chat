@@ -3,7 +3,7 @@ Auteurs : BOUGHANMI Rami, HENRIQUES DOS SANTOS Joaquim, RIBES Maël, WALLERAND A
 
 ## Présentation
 
-Pour ce projet, nous avons réaliser une application web de messagerie instantané, qui fonctionne par salon. Les utilisateurs peuvent s'inscrire pour pouvoir converser en rejoignant des salons de discussion.
+Pour ce projet, nous avons réaliser une application web de messagerie instantanée, qui fonctionne par salon. Les utilisateurs peuvent s'inscrire pour pouvoir converser en rejoignant des salons de discussion.
 
 ## Technologies utilisées
 
@@ -16,7 +16,7 @@ Pour ce projet, nous avons réaliser une application web de messagerie instantan
 [![Redis](https://img.shields.io/badge/redis-%23DD0031.svg?style=for-the-badge&logo=redis&logoColor=white)](https://redis.io/)
 [![SQLite](https://img.shields.io/badge/SQLite-07405E?style=for-the-badge&logo=sqlite&logoColor=white)](https://www.sqlite.org/index.html)
 
-Nous avons décidé d'utiliser le framework Django Python pour le BackEnd serveur, qui communiquent avec le client par des views HTML, contenant du code JavaScript. En ce qui concerne les bases de données, nous utilisons MongoDB afin de stocker les données sur les salons et les messages qu'elles contiennent. Puis Redis, pour gérer la session utilisateur et enregistrer les historiques de connexion.
+Nous avons décidé d'utiliser le framework Django Python pour le BackEnd serveur, qui communiquent avec le client par des views HTML, contenant du code JavaScript. En ce qui concerne les bases de données, nous utilisons MongoDB afin de stocker les données sur les salons et les messages qu'elles contiennent. Puis la base SQLite native à Django, pour les données des utilisateurs. Enfin, Redis permet de gérer la session utilisateur, enregistrer les historiques de connexion et est utilisé comme canal pour les sockets entre client et serveur.
 
 ## Installation
 
@@ -58,3 +58,12 @@ Enfin, nous avons développé un système de canal entre le client et le serveur
 
 ## Compétences acquises
 
+Nous avons utilisé le framework Django, car nous avons auparavant chacun déjà coder des projets utilisant JavaScipt pour le FrontEnd et le BackEnd. Cela nous ainsi permis d'apprendre le modèle MVC, qui est un standard aujourd'hui dans le développement web. De plus, nous avons ainsi pu remarquer que Django et Python sont des outils permettant de créer des applications robustes contrairement à ce que l'on pourrait croire, et que de nombreuses fonctionnalités natives du framework sont très utiles, comme la BD SQLite intégrée.
+
+Ensuite, nous avons pu acquérir des compétences techniques sur les bases non relationnelles que sont Redis et MongoDB. Premièrement, nous avons pu voir que Mongo est une base "froide", qui permet de stocker rapidement des données de manière un peu brut, même s'il est toujours possible d'imposer un schéma à respecter. Puis Redis contrairement à Mongo, est une base "chaude", qui permet de récupérer rapidement de la donnée et peut être utilisé comme cache, notamment pour la session.
+
+## Difficultés et améliorations possibles
+
+Au cours de ce projet, nous avons rencontré quelques difficultés notamment lorsqu'il fallait fusionner les branches contenant les nouvelles fonctionnalités avec la branche main. Ceci du fait des conflits entre dossiers générés automatiquement au lancement de l'application, et du fichier contenant le code de la BD SQLite, qui est lui aussi constamment modifié à chaque utilisation. Une autre complexité rencontré pour chacun a été la compréhension du framework Django et du modèle MVC. Cependant, ce soucis s'est naturellement réglé au fil des commits et ajouts de features.
+
+Le projet n'est pas complètement abouti, et de nombreuses fonctionnalités peuvent encore être implémentées. Tout d'abord, on pourrait rajouter des discussions privés entre 2 utilisateurs. Pour cela, il faudrait créer un autre objet discussion, qui prendrait les informations des deux utilisateurs souhaitant converser, et stocker leurs messages en faisant le lien avec ces derniers sur Mongo. Une autre fonctionnalité intéressante serait la possibilité d'ajouter des pièces jointes aux messages, notamment des images. Enfin, on pourrait ajouter une personnalisation complète du profil de chaque utilisateur, avec une photo, une description et des statistiques sur ses interactions avec l'application.

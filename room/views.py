@@ -3,15 +3,20 @@ from datetime import datetime
 from django.shortcuts import render
 
 from utils import get_db_handle
-from .forms import MessageForm
-from .models import Room
+from .forms import MessageForm, RoomForm
 
 (db_handle, client) = get_db_handle()
 db = client["WebChat"]
 
 
 def rooms(request):
-    rooms = Room.objects.all()
+    if request.method == 'POST':
+        form = RoomForm(request.POST)
+        if form.is_valid():
+            collectionRooms = db["Room"]
+            form = form.cleaned_data
+            form["name"] = form["name"].replace(" ","")
+            collectionRooms.insert_one(form)
     collection = db["Room"]
     return render(request, 'room/rooms.html', {'rooms': collection.find()})
 

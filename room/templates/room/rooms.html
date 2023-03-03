@@ -27,6 +27,13 @@
             font-weight: normal;
         }
 
+        h2 {
+            margin: 0;
+            font-size: 2em;
+            color: black;
+            font-weight: normal;
+        }
+
         .button {
             display: inline-block;
             padding: 1rem 2rem;
@@ -44,6 +51,13 @@
         .button:hover {
             background-color: #fff;
             cursor: pointer;
+        }
+
+        .salon-name {
+            margin: 0;
+            color: black;
+            font-size: 1em;
+            font-weight: normal;
         }
 
         /* Style pour la liste des salons */
@@ -150,6 +164,23 @@
             </a>
         </li>
     {% endfor %}
+    <br>
+    <div class="container">
+        <h2>Création de salon</h2>
+
+        {% if error_message %}
+            <div class="alert alert-danger error-message">{{ error_message }}</div>
+        {% endif %}
+        <br>
+        <form method="post" action=".">
+            <label class="salon-name" for="name">Nom de ton salon :
+                <input type="text" id="name" name="name" required>
+            </label>
+            {% csrf_token %}
+            <input id="room-submit" type="submit" value="Créer">
+        </form>
+        <br>
+    </div>
 </ul>
 </body>
 </html>

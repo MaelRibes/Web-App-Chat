@@ -2,9 +2,12 @@
 
 Auteurs : BOUGHANMI Rami, HENRIQUES DOS SANTOS Joaquim, RIBES Maël, WALLERAND Alex
 
+[![Contributors](https://img.shields.io/github/contributors/MaelRibes/Web-App-Chat)](https://github.com/MaelRibes/Web-App-Chat/graphs/contributors)
+[![Pull Requests](https://img.shields.io/github/issues-pr-closed/MaelRibes/Web-App-Chat)](https://github.com/MaelRibes/Web-App-Chat/pulls?q=is%3Apr+is%3Aclosed)
+
 ## Présentation
 
-Pour ce projet, nous avons réaliser une application web de messagerie instantanée, qui fonctionne par salon. Les
+Pour ce projet, nous avons réalisé une application web de messagerie instantanée, qui fonctionne par salon. Les
 utilisateurs peuvent s'inscrire pour pouvoir converser en rejoignant des salons de discussion.
 
 ## Technologies utilisées

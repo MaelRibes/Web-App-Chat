@@ -7,8 +7,6 @@ urlpatterns = [
     path("connexion/", views.connexion, name="connexion"),
     path("inscription/", views.inscription, name="inscription"),
     path("deconnexion/", views.deconnexion, name="deconnexion"),
-
-    path('header/', views.header, name='header'),
     path('historique/<str:user>/', views.historique, name='historique'),
 
 ]

@@ -76,11 +76,6 @@ def deconnexion(request):
     logout(request)
     return redirect('/')
 
-
-def header(request):
-    return render(request, 'chat_app/header.html')
-
-
 def historique(request, user):
     arrayOfHistoUsername = ((cache.keys(f"histo_*{user}")))
     userHistoData = []
